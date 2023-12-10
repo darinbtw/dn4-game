@@ -29,21 +29,43 @@ class Button(pygame.sprite.Sprite):
         self.image.fill(color)
         self.rect = self.image.get_rect()
 
-# Класс игрока
-class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y):
-        super().__init__()
-
-        self.image = pygame.Surface((50, 50))
-        self.image.fill(WHITE)
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-
-# Функция рисования меню
-def draw_menu():
+# Функция рисования главного меню
+def draw_main_menu():
     screen.fill(BLACK)
-    text = font.render("Меню", True, WHITE)
+    text = font.render("Главное меню", True, WHITE)
+    screen.blit(text, (WIDTH // 2 - text.get_width() // 2, HEIGHT // 4 - text.get_height() // 2))
+
+    # Здесь ты можешь добавить свой фон для меню, например:
+    # background_image = pygame.image.load("your_background_image.png")
+    # screen.blit(background_image, (0, 0))
+
+    pygame.display.flip()
+
+# Главное меню
+def main_menu():
+    in_main_menu = True
+
+    while in_main_menu:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_1:
+                    level_menu()
+                elif event.key == pygame.K_2:
+                    settings_menu()
+                elif event.key == pygame.K_3:
+                    pygame.quit()
+                    sys.exit()
+
+        draw_main_menu()
+        clock.tick(FPS)
+
+# Функция рисования меню выбора уровня
+def draw_level_menu():
+    screen.fill(BLACK)
+    text = font.render("Выбор уровня", True, WHITE)
     screen.blit(text, (WIDTH // 2 - text.get_width() // 2, HEIGHT // 4 - text.get_height() // 2))
     pygame.display.flip()
 
@@ -60,78 +82,32 @@ def level_menu():
                 if event.key == pygame.K_SPACE:
                     in_level_menu = False
 
-        draw_menu()
+        draw_level_menu()
         clock.tick(FPS)
 
-# Функция рисования меню создания карты
-def draw_map_creation_menu():
+# Функция рисования меню настроек
+def draw_settings_menu():
     screen.fill(BLACK)
-    text = font.render("Режим создания карты", True, WHITE)
+    text = font.render("Настройки", True, WHITE)
+    # Добавь сюда отрисовку элементов настроек
     screen.blit(text, (WIDTH // 2 - text.get_width() // 2, HEIGHT // 4 - text.get_height() // 2))
     pygame.display.flip()
 
-# Меню создания карты
-def map_creation_menu():
-    in_map_creation_menu = True
+# Меню настроек
+def settings_menu():
+    in_settings_menu = True
 
-    while in_map_creation_menu:
+    while in_settings_menu:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    in_map_creation_menu = False
+                    in_settings_menu = False
 
-        draw_map_creation_menu()
+        draw_settings_menu()
         clock.tick(FPS)
 
-# Главная функция игры
-def main():
-    level = 0  # Добавляем объявление переменной level
-
-    while True:
-        # Меню выбора уровня или создания карты
-        draw_menu()
-        pygame.display.flip()
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_1:
-                    level_menu()
-                elif event.key == pygame.K_2:
-                    map_creation_menu()
-
-        # Подготовка к игре или созданию карты
-        if level:
-            # Инициализация игры
-            player = Player(WIDTH // 2, HEIGHT - 50)
-
-            # Здесь можешь добавить логику для загрузки уровня в зависимости от выбранного уровня
-
-            running = True
-            while running:
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        running = False
-
-                # Обработка игровой логики здесь
-
-                screen.fill(BLACK)
-                # Рисование игровых объектов здесь
-                pygame.display.flip()
-                clock.tick(FPS)
-
-            # Здесь можешь добавить логику для перехода к следующему уровню
-        else:
-            # Режим создания карты
-            map_creation_menu()
-
-        pygame.quit()
-        sys.exit()
-
 if __name__ == "__main__":
-    main()
+    main_menu()

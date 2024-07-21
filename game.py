@@ -72,7 +72,7 @@ def game_over():
     screen.blit(text, (WIDTH // 2 - text.get_width() // 2, HEIGHT // 2 - text.get_height() // 2))
     
     font_small = pygame.font.Font(None, 36)
-    text_continue = font_small.render("Do you want to play again? (Y/N)", True, WHITE)
+    text_continue = font_small.render("Хотите продолжить игру?? (Y/N)", True, WHITE)
     screen.blit(text_continue, (WIDTH // 2 - text_continue.get_width() // 2, HEIGHT // 2 + text.get_height()))
     
     pygame.display.flip()

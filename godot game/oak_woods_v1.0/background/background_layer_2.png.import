@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://io7nnyj6ngur"
-path="res://.godot/imported/player.png-2e20f7fb6a2fd9c37474a383d134eb62.ctex"
+uid="uid://basma1tea6qhy"
+path="res://.godot/imported/background_layer_2.png-1292eb7f45740c435d7e9c7150684a7e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game assets/player.png"
-dest_files=["res://.godot/imported/player.png-2e20f7fb6a2fd9c37474a383d134eb62.ctex"]
+source_file="res://oak_woods_v1.0/background/background_layer_2.png"
+dest_files=["res://.godot/imported/background_layer_2.png-1292eb7f45740c435d7e9c7150684a7e.ctex"]
 
 [params]
 

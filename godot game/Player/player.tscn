@@ -189,3 +189,12 @@ scale = Vector2(0.984375, 0.901786)
 sprite_frames = SubResource("SpriteFrames_1orgs")
 animation = &"Idle"
 autoplay = "Idle"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.4, 2.4)
+process_callback = 0
+limit_left = 0
+limit_right = 2100
+limit_bottom = 600
+position_smoothing_enabled = true
+drag_horizontal_enabled = true

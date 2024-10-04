@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b28udvj650b82"]
+[gd_scene load_steps=22 format=3 uid="uid://b28udvj650b82"]
 
 [ext_resource type="Script" path="res://skeleton.gd" id="1_gu48k"]
 [ext_resource type="Texture2D" uid="uid://c2831wxi3iald" path="res://oak_woods_v1.0/Monsters_Creatures_Fantasy/Skeleton/Death.png" id="1_utyoy"]
@@ -74,7 +74,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Death",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -114,6 +114,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_bmdln"]
 radius = 143.003
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eyp87"]
+size = Vector2(14, 7.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8iwdp"]
+size = Vector2(17, 3)
+
 [node name="Skeleton" type="CharacterBody2D"]
 script = ExtResource("1_gu48k")
 
@@ -124,12 +130,28 @@ shape = SubResource("CapsuleShape2D_spnos")
 position = Vector2(-2, -1)
 scale = Vector2(0.5925, 0.5925)
 sprite_frames = SubResource("SpriteFrames_6c38l")
-animation = &"Run"
+animation = &"Death"
+autoplay = "Idle"
 
 [node name="Detector" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Detector"]
 shape = SubResource("CircleShape2D_bmdln")
 
+[node name="Death" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Death"]
+position = Vector2(0, -12.25)
+shape = SubResource("RectangleShape2D_eyp87")
+
+[node name="Death2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Death2"]
+position = Vector2(-0.5, 2)
+shape = SubResource("RectangleShape2D_8iwdp")
+
 [connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]
 [connection signal="body_exited" from="Detector" to="." method="_on_detector_body_exited"]
+[connection signal="body_entered" from="Death" to="." method="_on_death_body_entered"]
+[connection signal="body_entered" from="Death2" to="." method="_on_death_2_body_entered"]

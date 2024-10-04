@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0e0dwtexn215"]
+[gd_scene load_steps=10 format=3 uid="uid://c0e0dwtexn215"]
 
 [ext_resource type="PackedScene" uid="uid://cs5v8ykoqeigs" path="res://Player/player.tscn" id="1_0ydpm"]
 [ext_resource type="Texture2D" uid="uid://f01mbyt5003j" path="res://oak_woods_v1.0/background/background_layer_1.png" id="3_rjvy6"]
@@ -1241,6 +1241,20 @@ texture = ExtResource("5_qtgjv")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_k705l")
 
+[sub_resource type="GDScript" id="GDScript_vwkgy"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	text = \"HP: \" + str($\"../../Player/Player\".health)
+"
+
 [node name="Level" type="Node2D"]
 
 [node name="BG" type="ParallaxBackground" parent="."]
@@ -1286,3 +1300,23 @@ position = Vector2(147, 471)
 
 [node name="Skeleton" parent="Mobs" instance=ExtResource("6_5rdqg")]
 position = Vector2(391, -37)
+
+[node name="Skeleton2" parent="Mobs" instance=ExtResource("6_5rdqg")]
+position = Vector2(704, -225)
+
+[node name="Skeleton3" parent="Mobs" instance=ExtResource("6_5rdqg")]
+position = Vector2(829, 74)
+
+[node name="Skeleton4" parent="Mobs" instance=ExtResource("6_5rdqg")]
+position = Vector2(1498, 77)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 14.0
+offset_top = 343.0
+offset_right = 54.0
+offset_bottom = 370.0
+theme_override_font_sizes/font_size = 19
+text = "HP"
+script = SubResource("GDScript_vwkgy")

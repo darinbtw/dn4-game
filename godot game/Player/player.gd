@@ -8,6 +8,7 @@ const JUMP_VELOCITY = -400.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var anim = $AnimatedSprite2D
+var health = 100
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -35,6 +36,10 @@ func _physics_process(delta):
 		$AnimatedSprite2D.flip_h = true
 	elif direction == 1:
 		$AnimatedSprite2D.flip_h = false
+		
+	if health <= 0:
+		queue_free()
+		get_tree().change_scene_to_file("res://menu.tscn")
 		
 	if velocity.y > 0:
 		anim.play("Fall")

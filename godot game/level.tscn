@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c0e0dwtexn215"]
+[gd_scene load_steps=12 format=3 uid="uid://c0e0dwtexn215"]
 
 [ext_resource type="PackedScene" uid="uid://cs5v8ykoqeigs" path="res://Player/player.tscn" id="1_0ydpm"]
 [ext_resource type="Texture2D" uid="uid://f01mbyt5003j" path="res://oak_woods_v1.0/background/background_layer_1.png" id="3_rjvy6"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b3q5d2w2vmt14" path="res://oak_woods_v1.0/background/background_layer_3.png" id="5_2qo02"]
 [ext_resource type="Texture2D" uid="uid://bb3rp11qxi8t" path="res://oak_woods_v1.0/oak_woods_tileset.png" id="5_qtgjv"]
 [ext_resource type="PackedScene" uid="uid://b28udvj650b82" path="res://skeleton.tscn" id="6_5rdqg"]
+[ext_resource type="PackedScene" uid="uid://c2uj4cp82gc7a" path="res://Collectobels/gold.tscn" id="7_hsj37"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k705l"]
 texture = ExtResource("5_qtgjv")
@@ -1255,6 +1256,20 @@ func _process(delta):
 	text = \"HP: \" + str($\"../../Player/Player\".health)
 "
 
+[sub_resource type="GDScript" id="GDScript_3p58j"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	text = \"Gold: \" + str($\"../../Player/Player\".gold)
+"
+
 [node name="Level" type="Node2D"]
 
 [node name="BG" type="ParallaxBackground" parent="."]
@@ -1313,10 +1328,28 @@ position = Vector2(1498, 77)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 14.0
-offset_top = 343.0
-offset_right = 54.0
-offset_bottom = 370.0
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.099
+anchor_right = 0.093
+anchor_bottom = 0.17
+offset_left = -20.56
+offset_top = 278.848
+offset_right = -53.136
+offset_bottom = 259.84
 theme_override_font_sizes/font_size = 19
 text = "HP"
 script = SubResource("GDScript_vwkgy")
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+offset_left = 15.0
+offset_top = 370.0
+offset_right = 60.0
+offset_bottom = 393.0
+text = "Gold: "
+script = SubResource("GDScript_3p58j")
+
+[node name="Collectobles" type="Node2D" parent="."]
+
+[node name="Gold" parent="." instance=ExtResource("7_hsj37")]
+position = Vector2(708, 550)

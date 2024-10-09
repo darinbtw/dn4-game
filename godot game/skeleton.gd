@@ -56,4 +56,3 @@ func death():
 	anim.play("Death")
 	await  anim.animation_finished
 	queue_free()
-

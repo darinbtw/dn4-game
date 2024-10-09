@@ -13,7 +13,7 @@ offset_right = 673.0
 offset_bottom = 358.0
 theme_override_colors/font_color = Color(1, 0.174173, 0.127215, 1)
 theme_override_font_sizes/font_size = 40
-text = "Play"
+text = "Играть"
 
 [node name="Exit" type="Button" parent="."]
 offset_left = 443.0
@@ -22,7 +22,8 @@ offset_right = 672.0
 offset_bottom = 473.0
 theme_override_colors/font_color = Color(1, 0.174173, 0.127215, 1)
 theme_override_font_sizes/font_size = 40
-text = "Exit"
+text = "Выход
+"
 
 [node name="BG" parent="." instance=ExtResource("2_vxr5f")]
 

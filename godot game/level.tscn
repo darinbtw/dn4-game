@@ -1646,7 +1646,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	text = \"HP: \" + str($\"../../Player/Player\".health)
 "
 
@@ -1660,13 +1660,16 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	text = \"Gold: \" + str($\"../../Player/Player\".gold)
 "
 
 [node name="Level" type="Node2D"]
 
 [node name="BG" type="ParallaxBackground" parent="."]
+offset = Vector2(0, 300)
+scale = Vector2(0.5, 0.5)
+transform = Transform2D(0.5, 0, 0, 0.5, 0, 300)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="BG"]
 motion_scale = Vector2(0.2, 1)
@@ -1730,9 +1733,6 @@ text = "Gold: "
 script = SubResource("GDScript_3p58j")
 
 [node name="Collectobles" type="Node2D" parent="."]
-
-[node name="Gold" parent="." instance=ExtResource("7_hsj37")]
-position = Vector2(708, 550)
 
 [node name="Gold2" parent="." instance=ExtResource("7_hsj37")]
 position = Vector2(2061, 245)

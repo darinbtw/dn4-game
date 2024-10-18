@@ -9,7 +9,7 @@ enum{
 	SLIDE
 }
 
-const SPEED = 300.0
+const SPEED = 150.0
 const JUMP_VELOCITY = -400.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -20,12 +20,13 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var health = 100
 var gold = 0
 var state = MOVE
+var run_speed = 1
 
 func _physics_process(delta):
 	
 	match state:
 		MOVE:
-			pass
+			move_state()
 		ATTACK:
 			pass
 		ATTACK2:
@@ -42,6 +43,9 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	if health <= 0:
+		health = 0
+		animPlayer.play("Death")
+		await animPlayer.animation_finished
 		queue_free()
 		get_tree().change_scene_to_file("res://menu.tscn")
 		
@@ -53,9 +57,12 @@ func _physics_process(delta):
 func move_state ():
 	var direction = Input.get_axis("left", "right")
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x = direction * SPEED * run_speed
 		if velocity.y == 0:
-			animPlayer.play("Run")
+			if run_speed == 1:
+				animPlayer.play("Walk")
+			else:
+				animPlayer.play("Run")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		if velocity.y == 0:
@@ -65,4 +72,7 @@ func move_state ():
 		anim.flip_h = true
 	elif direction == 1:
 		anim.flip_h = false
-		
+	if Input.is_action_pressed("run"):
+		run_speed = 2
+	else:
+		run_speed = 1

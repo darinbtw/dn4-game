@@ -41,12 +41,6 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-		
-	if direction == -1:
-		anim.flip_h = true
-	elif direction == 1:
-		anim.flip_h = false
-		
 	if health <= 0:
 		queue_free()
 		get_tree().change_scene_to_file("res://menu.tscn")
@@ -66,3 +60,9 @@ func move_state ():
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		if velocity.y == 0:
 			animPlayer.play("Idle")
+			
+	if direction == -1:
+		anim.flip_h = true
+	elif direction == 1:
+		anim.flip_h = false
+		

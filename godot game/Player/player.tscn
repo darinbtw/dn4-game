@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=3 uid="uid://cs5v8ykoqeigs"]
+[gd_scene load_steps=100 format=3 uid="uid://cs5v8ykoqeigs"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_jb0l4"]
 [ext_resource type="Texture2D" uid="uid://cyuh5cyedkods" path="res://oak_woods_v1.0/character/char_blue.png" id="1_x44ie"]
@@ -649,6 +649,20 @@ tracks/1/keys = {
 "update": 1,
 "values": ["Attack"]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"combo1"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_68lcb"]
 length = 0.3
@@ -950,6 +964,21 @@ tracks/1/keys = {
 "values": ["Walk"]
 }
 
+[sub_resource type="Animation" id="Animation_ladbb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Attack"]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bu1qt"]
 _data = {
 "Attack": SubResource("Animation_nofs1"),
@@ -961,6 +990,7 @@ _data = {
 "Fall": SubResource("Animation_dnkq3"),
 "Idle": SubResource("Animation_3knhy"),
 "Jump": SubResource("Animation_egq6c"),
+"RESET": SubResource("Animation_ladbb"),
 "Run": SubResource("Animation_vdhh7"),
 "Slide": SubResource("Animation_fn164"),
 "Walk": SubResource("Animation_fx07r")
@@ -976,8 +1006,9 @@ shape = SubResource("CapsuleShape2D_1qqtu")
 position = Vector2(1.5625, -11.75)
 scale = Vector2(0.984375, 0.901786)
 sprite_frames = SubResource("SpriteFrames_1orgs")
-animation = &"Run"
+animation = &"Attack"
 autoplay = "Idle"
+frame = 4
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.4, 2.4)
@@ -993,3 +1024,4 @@ drag_horizontal_enabled = true
 libraries = {
 "": SubResource("AnimationLibrary_bu1qt")
 }
+autoplay = "Idle"

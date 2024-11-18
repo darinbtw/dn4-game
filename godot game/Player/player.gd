@@ -21,6 +21,7 @@ var health = 100
 var gold = 0
 var state = MOVE
 var run_speed = 1
+var combo = false
 
 func _physics_process(delta):
 	
@@ -28,15 +29,15 @@ func _physics_process(delta):
 		MOVE:
 			move_state()
 		ATTACK:
-			pass
+			attack_state()
 		ATTACK2:
 			pass
 		ATTACK3:
 			pass
 		BLOCK:
-			pass
+			block_state()
 		SLIDE:
-			pass
+			Slide_state()
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -72,7 +73,47 @@ func move_state ():
 		anim.flip_h = true
 	elif direction == 1:
 		anim.flip_h = false
+	
 	if Input.is_action_pressed("run"):
 		run_speed = 2
 	else:
 		run_speed = 1
+	
+	if Input.is_action_pressed('block'):
+		if velocity.x == 0:
+			state = BLOCK
+		else:
+			state = SLIDE
+	
+	if Input.is_action_just_pressed('fight'):
+		state = ATTACK
+
+func block_state():
+	velocity.x = 0
+	animPlayer.play('Block')
+	if Input.is_action_just_released('block'):
+		state = MOVE
+
+func Slide_state():
+	animPlayer.play('Slide')
+	await animPlayer.animation_finished
+	state = MOVE
+	
+func attack_state():
+	if Input.is_action_just_pressed('fight') and combo == true:
+		state = ATTACK2
+	velocity.x = 0	
+	animPlayer.play("Attack")
+	await  animPlayer.animation_finished
+	state = MOVE
+	
+func attack2_state():
+	animPlayer.play("Attack2")
+	await animPlayer.animation_finished
+	state = MOVE
+
+func combo1():
+	combo = true
+	await animPlayer.animation_finished
+	combo = false
+	

@@ -22,6 +22,7 @@ var gold = 0
 var state = MOVE
 var run_speed = 1
 var combo = false
+var attack_cooldown = false
 
 func _physics_process(delta):
 	
@@ -31,9 +32,9 @@ func _physics_process(delta):
 		ATTACK:
 			attack_state()
 		ATTACK2:
-			pass
+			attack2_state()
 		ATTACK3:
-			pass
+			attack3_state()
 		BLOCK:
 			block_state()
 		SLIDE:
@@ -85,7 +86,7 @@ func move_state ():
 		else:
 			state = SLIDE
 	
-	if Input.is_action_just_pressed('fight'):
+	if Input.is_action_just_pressed('fight') and attack_cooldown == false: 
 		state = ATTACK
 
 func block_state():
@@ -105,10 +106,18 @@ func attack_state():
 	velocity.x = 0	
 	animPlayer.play("Attack")
 	await  animPlayer.animation_finished
+	attack_freeze()
 	state = MOVE
 	
 func attack2_state():
+	if Input.is_action_just_pressed('fight') and combo == true:
+		state = ATTACK3
 	animPlayer.play("Attack2")
+	await animPlayer.animation_finished
+	state = MOVE
+
+func attack3_state():
+	animPlayer.play("Attack3")
 	await animPlayer.animation_finished
 	state = MOVE
 
@@ -117,3 +126,7 @@ func combo1():
 	await animPlayer.animation_finished
 	combo = false
 	
+func attack_freeze():
+	attack_cooldown = true
+	await get_tree().create_timer(0.3).timeout
+	attack_cooldown = false

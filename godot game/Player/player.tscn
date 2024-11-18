@@ -690,6 +690,20 @@ tracks/1/keys = {
 "update": 1,
 "values": ["Attack2"]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"combo1"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_moktu"]
 length = 0.8
@@ -1008,7 +1022,6 @@ scale = Vector2(0.984375, 0.901786)
 sprite_frames = SubResource("SpriteFrames_1orgs")
 animation = &"Attack"
 autoplay = "Idle"
-frame = 4
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.4, 2.4)
